@@ -6,6 +6,12 @@ import { z } from "zod";
 const Form = z.object({
   password: z.string(),
   confirmPassword: z.string(),
+}).refine((args) => {
+  if (args.password !== args.confirmPassword) {
+    throw new Error("Passwords don't match");
+  }
+
+  return true;
 });
 //^ 🕵️‍♂️
 
